@@ -34,7 +34,7 @@ export const updateProduct = async (id, data) => {
 
 export const deleteProduct = async (id) => {
   const res = await fetch(
-    `http://localhost:5000/api/products/delete/${id}`,
+    `import.meta.env.VITE_API_URL/api/products/delete/${id}`,
     {
       method: "DELETE"
     }

@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5000/api/auth";
+const BASE_URL = `import.meta.env.VITE_API_URL/api/auth`;
 
 export const loginUser = async (email, password) => {
   const res = await fetch(`${BASE_URL}/login`, {
@@ -18,7 +18,7 @@ export const signupUser = async (name, email, password) => {
   return res.json();
 };
 export const updateProfile = async (userId, name, address) => {
-  const res = await fetch(`http://localhost:5000/api/auth/update-profile`, {
+  const res = await fetch(`import.meta.env.VITE_API_URL/api/auth/update-profile`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ userId, name, address })

@@ -1,7 +1,7 @@
-const BASE_URL = "http://localhost:5000/api/cart";
+const BASE_URL = `import.meta.env.VITE_API_URL/api/cart`;
 
 export const getCart = async (userId) => {
-  const res = await fetch(`http://localhost:5000/api/cart/${userId}`);
+  const res = await fetch(`import.meta.env.VITE_API_URL/api/cart/${userId}`);
   return res.json();
 };
 
