@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5000/api/products";
+const BASE_URL = "https://my-project-xxxx.onrender.com/api/products";
 
 export const getAllProducts = async () => {
   const res = await fetch(BASE_URL);
@@ -22,7 +22,7 @@ export const addProduct = async (product) => {
 
 export const updateProduct = async (id, data) => {
   const res = await fetch(
-    `http://localhost:5000/api/products/${id}`,
+    `https://my-project-xxxx.onrender.com/api/products/${id}`,
     {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -34,7 +34,7 @@ export const updateProduct = async (id, data) => {
 
 export const deleteProduct = async (id) => {
   const res = await fetch(
-    `http://localhost:5000/api/products/delete/${id}`,
+    `https://my-project-xxxx.onrender.com/api/products/delete/${id}`,
     {
       method: "DELETE"
     }
@@ -64,7 +64,7 @@ export const deleteProduct = async (id) => {
 //   return res.json();
 // };
 export const getAllOrders = async () => {
-  const res = await fetch("http://localhost:5000/api/orders");
+  const res = await fetch("https://my-project-xxxx.onrender.com/api/orders");
   return res.json();
 };
 
