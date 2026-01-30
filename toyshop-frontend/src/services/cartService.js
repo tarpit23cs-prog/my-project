@@ -1,7 +1,7 @@
-const BASE_URL = "https://my-project-xxxx.onrender.com/api/cart";
+const BASE_URL = "http://localhost:5000/api/cart";
 
 export const getCart = async (userId) => {
-  const res = await fetch(`https://my-project-xxxx.onrender.com/api/cart/${userId}`);
+  const res = await fetch(`http://localhost:5000/api/cart/${userId}`);
   return res.json();
 };
 
