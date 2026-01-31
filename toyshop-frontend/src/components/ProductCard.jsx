@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+const navigate = useNavigate();
 
 
 function ProductCard({ product, onAddToCart, isLoggedIn }) {
