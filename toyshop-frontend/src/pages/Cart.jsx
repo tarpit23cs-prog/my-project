@@ -11,12 +11,13 @@ function Cart() {
   const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    if (!user) {
-      navigate("/login");
-      return;
-    }
-    loadCart();
-  }, []);
+  if (!user) {
+    navigate("/login");
+    return;
+  }
+  loadCart();
+}, [user, navigate]);
+
 
   const loadCart = async () => {
     const res = await getCart(user._id);
