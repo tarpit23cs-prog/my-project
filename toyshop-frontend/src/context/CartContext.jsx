@@ -1,12 +1,15 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
+import { AuthContext } from "./AuthContext"; // SAME FOLDER CHECK KAR
 
 export const CartContext = createContext(null);
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+  const auth = useContext(AuthContext);
+
+  const user = auth?.user || null;
 
   return (
-    <CartContext.Provider value={{ cart, setCart }}>
+    <CartContext.Provider value={{ user }}>
       {children}
     </CartContext.Provider>
   );
