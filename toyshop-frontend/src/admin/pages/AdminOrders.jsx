@@ -14,11 +14,22 @@ function AdminOrders() {
       return;
     }
     loadOrders();
-  }, []);
+  }, [navigate]);
 
   const loadOrders = async () => {
-    const res = await getAllOrders();
-    if (res.success) setOrders(res.data);
+    try {
+      const res = await getAllOrders();
+      console.log("ADMIN ORDERS RESPONSE:", res);
+
+      if (res?.success && Array.isArray(res.data)) {
+        setOrders(res.data);
+      } else {
+        setOrders([]);
+      }
+    } catch (err) {
+      console.error("Failed to load orders", err);
+      setOrders([]);
+    }
   };
 
   return (
@@ -29,16 +40,18 @@ function AdminOrders() {
         <div className="alert alert-warning">No orders found</div>
       ) : (
         <div className="row">
-          {orders.map(order => (
+          {orders.map((order) => (
             <div className="col-md-6 mb-4" key={order._id}>
               <div className="card shadow-sm h-100">
                 <div className="card-body">
                   <p className="mb-1">
                     <b>Order ID:</b> <small>{order._id}</small>
                   </p>
+
                   <p className="mb-1">
                     <b>Customer:</b> {order.userId?.name || "N/A"}
                   </p>
+
                   <p className="mb-1">
                     <b>Status:</b>{" "}
                     <span
@@ -50,24 +63,37 @@ function AdminOrders() {
                           : "bg-warning text-dark"
                       }`}
                     >
-                      {order.status}
+                      {order.status || "Pending"}
                     </span>
                   </p>
-                  <p className="fw-bold">Total: ₹{order.totalAmount}</p>
+
+                  <p className="fw-bold">
+                    Total: ₹{order.totalAmount || 0}
+                  </p>
 
                   <hr />
 
                   <h6>Items</h6>
-                  <ul className="list-group list-group-flush">
-                    {order.items.map(item => (
-                      <li className="list-group-item px-0" key={item._id}>
-                        {item.productId?.name || "Product removed"}  
-                        <span className="float-end">
-                          Qty: {item.quantity}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
+
+                  {Array.isArray(order.items) && order.items.length > 0 ? (
+                    <ul className="list-group list-group-flush">
+                      {order.items.map((item) => (
+                        <li
+                          className="list-group-item px-0"
+                          key={item._id}
+                        >
+                          {item.productId?.name || "Product removed"}
+                          <span className="float-end">
+                            Qty: {item.quantity || 0}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="text-muted small">
+                      No items found for this order
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
