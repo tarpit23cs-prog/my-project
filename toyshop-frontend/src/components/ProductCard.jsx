@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 
 
 function ProductCard({ product, onAddToCart, isLoggedIn }) {
+  const navigate = useNavigate();
   const handleClick = () => {
     if (!isLoggedIn) {
       alert("Please login to add product to cart");
