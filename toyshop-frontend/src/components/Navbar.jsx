@@ -1,5 +1,3 @@
-console.log("NAVBAR RENDERED");
-
 import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {

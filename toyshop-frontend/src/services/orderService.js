@@ -1,5 +1,4 @@
-const BASE_URL = `${import.meta.env.VITE_API_URL}/api/auth`;
-
+const BASE_URL = `import.meta.env.VITE_API_URL/api/orders`;
 
 export const getOrdersByUser = async (userId) => {
   const res = await fetch(`${BASE_URL}/${userId}`);

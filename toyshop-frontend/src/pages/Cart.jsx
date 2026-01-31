@@ -1,5 +1,3 @@
-console.log("CART RENDERED");
-
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import { getCart, removeFromCart } from "../services/cartService";
