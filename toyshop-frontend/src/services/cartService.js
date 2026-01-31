@@ -1,4 +1,5 @@
-const BASE_URL = `import.meta.env.VITE_API_URL/api/cart`;
+const BASE_URL = `${import.meta.env.VITE_API_URL}/api/auth`;
+
 
 export const getCart = async (userId) => {
   const res = await fetch(`${BASE_URL}/api/cart/${userId}`);
