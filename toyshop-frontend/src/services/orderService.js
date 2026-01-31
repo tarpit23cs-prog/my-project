@@ -5,7 +5,7 @@ export const getOrdersByUser = async (userId) => {
   return res.json();
 };
 export const placeOrder = async (userId) => {
-  const res = await fetch(`${BASE_URL}/api/orders/place`, {
+  const res = await fetch(`${BASE_URL}/place`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ userId })
@@ -13,11 +13,11 @@ export const placeOrder = async (userId) => {
   return res.json();
 };
 export const getInvoice = async (orderId) => {
-  const res = await fetch(`${BASE_URL}/api/orders/invoice/${orderId}`);
+  const res = await fetch(`${BASE_URL}/invoice/${orderId}`);
   return res.json();
 };
 export const cancelOrder = async (orderId) => {
-  const res = await fetch(`${BASE_URL}/api/orders/${orderId}`, {
+  const res = await fetch(`${BASE_URL}/${orderId}`, {
     method: "DELETE"
   });
   return res.json();
