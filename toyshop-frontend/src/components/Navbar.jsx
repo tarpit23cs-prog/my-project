@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 
-function Navbar() {
-  const user = JSON.parse(localStorage.getItem("user"));
+function Navbar({ user, setUser }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("user");
+    setUser(null);
     navigate("/login");
   };
 
@@ -46,109 +46,117 @@ function Navbar() {
       `}</style>
 
       <nav className="navbar navbar-expand-lg navbar-dark custom-navbar px-4 fixed-top">
-        <Link className="navbar-brand d-flex align-items-center gap-2" to="/">
-          <i className="fa-solid fa-child-reaching"></i>
-          ToyShop
-        </Link>
+        <div className="container-fluid">
+          <Link className="navbar-brand d-flex align-items-center gap-2" to="/">
+            <i className="fa-solid fa-child-reaching"></i>
+            ToyShop
+          </Link>
 
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
 
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto gap-lg-3 align-items-lg-center">
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav ms-auto gap-lg-3 align-items-lg-center">
 
-            <li className="nav-item">
-              <Link className="nav-link" to="/">
-                <i className="fa-solid fa-house icon"></i> Home
-              </Link>
-            </li>
-<li className="nav-item">
-              <Link className="nav-link" to="/about">
-                <i className="fa-solid fa-house icon"></i> About
-              </Link>
-            </li>
-            {!user && (
-              <>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/login">
-                    <i className="fa-solid fa-right-to-bracket icon"></i> Login
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="btn btn-dark signup-btn px-3" to="/signup">
-                    <i className="fa-solid fa-user-plus"></i> Signup
-                  </Link>
-                </li>
-              </>
-            )}
+              <li className="nav-item">
+                <Link className="nav-link" to="/">
+                  <i className="fa-solid fa-house icon"></i> Home
+                </Link>
+              </li>
 
-            {user && user.role === "customer" && (
-              <>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/products">
-                    <i className="fa-solid fa-box-open icon"></i> Products
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/cart">
-                    <i className="fa-solid fa-cart-shopping icon"></i> My Cart
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/orders">
-                    <i className="fa-solid fa-receipt icon"></i> Orders
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/profile">
-                    <i className="fa-solid fa-user icon"></i> Profile
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <button className="btn btn-outline-light btn-sm" onClick={handleLogout}>
-                    <i className="fa-solid fa-right-from-bracket"></i> Logout
-                  </button>
-                </li>
-              </>
-            )}
+              <li className="nav-item">
+                <Link className="nav-link" to="/about">
+                  <i className="fa-solid fa-circle-info icon"></i> About
+                </Link>
+              </li>
 
-            {user && user.role === "admin" && (
-              <>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/admin/products">
-                    <i className="fa-solid fa-boxes-stacked icon"></i> Admin Products
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/admin/orders">
-                    <i className="fa-solid fa-clipboard-list icon"></i> Admin Orders
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/admin/stock">
-                    <i className="fa-solid fa-warehouse icon"></i> Stock
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/profile">
-                    <i className="fa-solid fa-user-shield icon"></i> Profile
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <button className="btn btn-danger btn-sm" onClick={handleLogout}>
-                    <i className="fa-solid fa-power-off"></i> Logout
-                  </button>
-                </li>
-              </>
-            )}
+              {/* If NOT Logged In */}
+              {!user && (
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/login">
+                      <i className="fa-solid fa-right-to-bracket icon"></i> Login
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="btn btn-dark signup-btn px-3" to="/signup">
+                      <i className="fa-solid fa-user-plus"></i> Signup
+                    </Link>
+                  </li>
+                </>
+              )}
 
-          </ul>
+              {/* CUSTOMER NAVBAR */}
+              {user && user.role === "customer" && (
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/products">
+                      <i className="fa-solid fa-box-open icon"></i> Products
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/cart">
+                      <i className="fa-solid fa-cart-shopping icon"></i> My Cart
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/orders">
+                      <i className="fa-solid fa-receipt icon"></i> Orders
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/profile">
+                      <i className="fa-solid fa-user icon"></i> Profile
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <button
+                      className="btn btn-outline-light btn-sm"
+                      onClick={handleLogout}
+                    >
+                      <i className="fa-solid fa-right-from-bracket"></i> Logout
+                    </button>
+                  </li>
+                </>
+              )}
+
+              {/* ADMIN NAVBAR */}
+              {user && user.role === "admin" && (
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/admin/products">
+                      <i className="fa-solid fa-boxes-stacked icon"></i> Admin Products
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/admin/orders">
+                      <i className="fa-solid fa-clipboard-list icon"></i> Admin Orders
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/profile">
+                      <i className="fa-solid fa-user-shield icon"></i> Profile
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <button
+                      className="btn btn-danger btn-sm"
+                      onClick={handleLogout}
+                    >
+                      <i className="fa-solid fa-power-off"></i> Logout
+                    </button>
+                  </li>
+                </>
+              )}
+
+            </ul>
+          </div>
         </div>
       </nav>
     </>

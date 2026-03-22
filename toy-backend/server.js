@@ -9,25 +9,14 @@ const app = express();
 
 // middleware
 
-app.use(
-  cors({
-    origin: [
-      "https://my-project-1-ixjo.onrender.com",
-      "http://localhost:5173", // local dev (optional)
-      "http://localhost:3000"  // local dev (optional)
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    credentials: true,
-  })
-);
+
+app.use(cors({ origin: "*" }));
+
 app.use(express.json());
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/products", require("./routes/productRoutes"));
 app.use("/api/cart", require("./routes/cartRoutes"));
 app.use("/api/orders", require("./routes/orderRoutes"));
-
-
-app.options("*", cors());
 
 // DB connect
 connectDB();

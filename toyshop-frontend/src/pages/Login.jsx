@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { loginUser } from "../services/authService";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-function Login() {
+import { useNavigate, Link } from "react-router-dom";
+
+function Login({ setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -15,17 +15,24 @@ function Login() {
     const res = await loginUser(email, password);
 
     if (res.success) {
-      localStorage.setItem(
-        "user",
-        JSON.stringify({
-          _id: res.data.user.id,
-          name: res.data.user.name,
-          email: res.data.user.email,
-          role: res.data.user.role,
-          address: res.data.user.address || ""
-        })
-      );
-      navigate("/products");
+      const userData = {
+        _id: res.data.user.id,
+        name: res.data.user.name,
+        email: res.data.user.email,
+        role: res.data.user.role,
+        address: res.data.user.address || ""
+      };
+
+      localStorage.setItem("user", JSON.stringify(userData));
+
+      setUser(userData); // 🔥 Important for instant navbar update
+
+      if (userData.role === "admin") {
+        navigate("/admin/products");
+      } else {
+        navigate("/products");
+      }
+
     } else {
       alert(res.message || "Login failed");
     }
@@ -39,7 +46,7 @@ function Login() {
 
         <div className="card-header bg-warning text-dark text-center py-4">
           <h3 className="fw-bold mb-0">ToyShop 🧸</h3>
-          <small className="text-dark">Welcome back</small>
+          <small>Welcome back</small>
         </div>
 
         <div className="card-body p-4">
@@ -50,9 +57,8 @@ function Login() {
               <input
                 type="email"
                 className="form-control"
-                placeholder="you@example.com"
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -62,9 +68,8 @@ function Login() {
               <input
                 type="password"
                 className="form-control"
-                placeholder="••••••••"
                 value={password}
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
@@ -76,17 +81,16 @@ function Login() {
             >
               {loading ? "Logging in..." : "Login"}
             </button>
+
           </form>
         </div>
 
         <div className="card-footer text-center bg-white border-0">
-          <small className="text-muted">
+          <small>
             New user?{" "}
-            <span className="fw-semibold">
-              <Link to="/signup" style={{ color: "#000", textDecoration: "none" }}>
-                Register first
-              </Link>
-            </span>
+            <Link to="/signup" style={{ textDecoration: "none" }}>
+              Register first
+            </Link>
           </small>
         </div>
 

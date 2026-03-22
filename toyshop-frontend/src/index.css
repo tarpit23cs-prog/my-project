@@ -1,17 +1,17 @@
+/* ============================= */
+/* ROOT + GLOBAL */
+/* ============================= */
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: 'Poppins', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  color: #1f2937;
+  background-color: #f5f7fb;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 html, body, #root {
   width: 100%;
   margin: 0;
@@ -19,164 +19,207 @@ html, body, #root {
   overflow-x: hidden;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #f5f7fb;
 }
+
+/* ============================= */
+/* LINKS */
+/* ============================= */
+
+a {
+  font-weight: 500;
+  color: #ff7a00;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+a:hover {
+  color: #ff5500;
+}
+
+/* ============================= */
+/* HEADINGS */
+/* ============================= */
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 2.6rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
+
+/* ============================= */
+/* BUTTONS */
+/* ============================= */
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
+  border-radius: 50px;
+  border: none;
+  padding: 0.7em 1.6em;
+  font-size: 0.95rem;
+  font-weight: 600;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background: linear-gradient(135deg, #ff7a00, #ff5500);
+  color: #ffffff;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.3s ease;
 }
+
 button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(255,85,0,0.3);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-/* ===== Global Reset ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+button:focus {
+  outline: none;
 }
 
-body {
-  font-family: "Inter", "Segoe UI", sans-serif;
-  background-color: #f8f9fb;
-  color: #212529;
-}
+/* ============================= */
+/* NAVBAR */
+/* ============================= */
 
-/* ===== Links ===== */
-a {
-  text-decoration: none !important;
-  color: inherit;
-}
-
-/* ===== Navbar ===== */
 .navbar-custom {
-  background: linear-gradient(135deg, #111827, #1f2933);
-  padding: 0.8rem 1.2rem;
+  background: #ffffff;
+  padding: 1rem 3rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
 }
 
 .navbar-custom .nav-link {
-  color: #e5e7eb !important;
+  color: #374151 !important;
   font-weight: 500;
-  margin-right: 1rem;
+  margin-right: 1.2rem;
   transition: 0.3s ease;
 }
 
 .navbar-custom .nav-link:hover {
-  color: #38bdf8 !important;
+  color: #ff7a00 !important;
 }
 
-/* ===== Buttons ===== */
-.btn-mst {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: #fff;
-  border: none;
-  padding: 0.55rem 1.2rem;
-  border-radius: 8px;
-  font-weight: 500;
-  transition: 0.3s ease;
+/* ============================= */
+/* PRODUCT GRID FIX */
+/* ============================= */
+
+.row.g-4 > [class*='col'] {
+  display: flex;
 }
 
-.btn-mst:hover {
-  background: linear-gradient(135deg, #1e40af, #1e3a8a);
-  transform: translateY(-1px);
-}
+/* ============================= */
+/* PRODUCT CARDS */
+/* ============================= */
 
-/* Outline */
-.btn-mst-outline {
-  border: 2px solid #2563eb;
-  color: #2563eb;
-  background: transparent;
-  border-radius: 8px;
-  padding: 0.5rem 1.1rem;
-  transition: 0.3s ease;
-}
-
-.btn-mst-outline:hover {
-  background: #2563eb;
-  color: #fff;
-}
-
-/* ===== Cards ===== */
 .card-mst {
-  border: none;
-  border-radius: 14px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
-  transition: 0.3s ease;
-  background: #fff;
+  width: 100%;
+  height: 430px;               /* fixed consistent height */
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: 0.4s ease;
 }
 
 .card-mst:hover {
   transform: translateY(-6px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
 }
 
-/* ===== Forms ===== */
+/* Image area always fixed */
+.card-mst img,
+.card-img-top {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  background-color: #f3f4f6;   /* fallback bg */
+}
+
+/* Card body layout */
+.card-mst .card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+/* Title fixed space */
+.card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  min-height: 48px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Description controlled */
+.card-text {
+  font-size: 0.9rem;
+  color: #6b7280;
+  min-height: 40px;
+  overflow: hidden;
+}
+
+/* Push last element (button wrapper) down */
+.card-mst .card-body > *:last-child {
+  margin-top: auto;
+}
+
+/* ============================= */
+/* FORMS */
+/* ============================= */
+
 .form-control {
-  border-radius: 10px;
-  padding: 0.6rem 0.8rem;
+  border-radius: 12px;
+  padding: 0.7rem 0.9rem;
   border: 1px solid #d1d5db;
+  transition: 0.3s ease;
 }
 
 .form-control:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 0.15rem rgba(37,99,235,0.25);
+  border-color: #ff7a00;
+  box-shadow: 0 0 0 0.15rem rgba(255,122,0,0.25);
+  outline: none;
 }
 
-/* ===== Headings ===== */
+/* ============================= */
+/* PAGE TITLE */
+/* ============================= */
+
 .page-title {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: #111827;
 }
 
-/* ===== Utility ===== */
-.shadow-soft {
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 992px) {
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  .navbar-custom {
+    padding: 1rem 1.5rem;
+  }
 }
 
-.rounded-xl {
-  border-radius: 16px;
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+  }
+
+  .card-mst {
+    height: 410px;
+  }
 }

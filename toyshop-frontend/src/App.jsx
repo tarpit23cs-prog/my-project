@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -17,20 +18,28 @@ import AdminProducts from "./admin/pages/AdminProducts";
 import AdminOrders from "./admin/pages/AdminOrders";
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  // On page load, get user from localStorage
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser) {
+      setUser(storedUser);
+    }
+  }, []);
+
   return (
     <div className="d-flex flex-column min-vh-100">
-      
-      {/* NAVBAR */}
-      <Navbar />
 
-      {/* MAIN CONTENT */}
+      <Navbar user={user} setUser={setUser} />
+
       <main className="flex-grow-1 container py-4">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
 
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login setUser={setUser} />} />
           <Route path="/signup" element={<Signup />} />
 
           <Route path="/products" element={<Products />} />
@@ -44,9 +53,7 @@ function App() {
         </Routes>
       </main>
 
-      {/* FOOTER */}
       <Footer />
-
     </div>
   );
 }
